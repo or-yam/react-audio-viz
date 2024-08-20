@@ -5,9 +5,18 @@ import { renderFrequencyGraph } from './frequencyGrraph';
 const AudioVisualizer = ({
   width,
   height,
+  options = {},
 }: {
   width: number;
   height: number;
+  options?: {
+    barGap?: number;
+    redFactor?: number;
+    greenFactor?: number;
+    blueFactor?: number;
+    borderRadius?: number;
+    centered?: boolean;
+  };
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isAnimating = useRef(false);
@@ -32,9 +41,10 @@ const AudioVisualizer = ({
         canvasContext,
         canvasHeight: height,
         canvasWidth: width,
+        options,
       });
     },
-    [height, width],
+    [height, width, options],
   );
 
   useEffect(() => {
