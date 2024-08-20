@@ -1,8 +1,9 @@
 {
-  "name": "vite-react-lib",
+  "name": "@audio-visualizer/react-audio-visualizer",
   "private": false,
   "version": "0.0.1",
   "type": "module",
+  "exports": "./src/lib/index.ts",
   "scripts": {
     "dev": "vite ./src/demo-app",
     "build": "tsc && vite build",
