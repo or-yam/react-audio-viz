@@ -1,11 +1,10 @@
-import { useCallback, useEffect, useRef } from 'react';
-import { initAudio } from '../../utils/initAudio';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { initMicrophone } from '../../utils/initMicrophone';
 import { renderFrequencyGraph } from '../../utils/frequencyGraph';
 
-type AudioInputVisualizerProps = {
+type MicrophoneInputVisualizerProps = {
   width: number;
   height: number;
-  audioElement?: HTMLAudioElement;
   options?: {
     barGap?: number;
     redFactor?: number;
@@ -16,22 +15,28 @@ type AudioInputVisualizerProps = {
   };
 };
 
-export const AudioVisualizer = ({
+export const MickInputVisualizer = ({
   width,
   height,
-  audioElement,
   options = {},
-}: AudioInputVisualizerProps) => {
+}: MicrophoneInputVisualizerProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isAnimating = useRef(false);
+  const [isMicAvailable, setIsMicAvailable] = useState(false);
 
-  const audioInit = useCallback(
+  const handleMicrophonePermission = async () => {
+    try {
+      navigator.mediaDevices.getUserMedia({ audio: true });
+      setIsMicAvailable(true);
+    } catch (err) {
+      setIsMicAvailable(false);
+    }
+  };
+
+  const microphoneInit = useCallback(
     async (canvasContext: CanvasRenderingContext2D) => {
-      if (!audioElement) return;
-
+      const { analyser, audioContext } = await initMicrophone();
       isAnimating.current = true;
-      const { analyser, audioContext } = await initAudio(audioElement);
-
       renderFrequencyGraph({
         analyser,
         audioContext,
@@ -41,19 +46,21 @@ export const AudioVisualizer = ({
         options,
       });
     },
-    [audioElement, height, width, options],
+    [height, width, options],
   );
 
   useEffect(() => {
+    if (!isMicAvailable) handleMicrophonePermission();
+
     const canvasContext = canvasRef.current?.getContext('2d');
     if (!canvasContext) return;
-    if (isAnimating.current) return;
 
-    audioInit(canvasContext);
+    microphoneInit(canvasContext);
+
     return () => {
       isAnimating.current = false;
     };
-  }, [audioInit]);
+  }, [isMicAvailable, microphoneInit]);
 
   return <canvas width={width} height={height} ref={canvasRef} />;
 };

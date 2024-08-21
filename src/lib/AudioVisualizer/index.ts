@@ -1,1 +1,1 @@
-export { AudioVisualizer } from './audiovisualizer';
+export { AudioVisualizer } from './audioVisualizer';
