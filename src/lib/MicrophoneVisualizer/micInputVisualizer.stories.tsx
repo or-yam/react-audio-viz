@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { AudioVisualizer } from './index';
+import { MickInputVisualizer } from './index';
 
 const meta = {
-  title: 'AudioVisualizer',
-  component: AudioVisualizer,
+  title: 'MickInputVisualizer',
+  component: MickInputVisualizer,
   parameters: {},
   tags: [],
   argTypes: {},
   args: { height: 300, width: 300 },
-} satisfies Meta<typeof AudioVisualizer>;
+} satisfies Meta<typeof MickInputVisualizer>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
