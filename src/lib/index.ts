@@ -1,2 +1,2 @@
-export { AudioVisualizer } from './AudioVisualizer';
-export { MickInputVisualizer } from './MicrophoneVisualizer';
+export { AudioVisualizer } from './AudioVisualizer/index.ts';
+export { MickInputVisualizer } from './MicrophoneVisualizer/index.ts';

@@ -1,1 +1,1 @@
-export { MickInputVisualizer } from './micInputVisualizer';
+export { MickInputVisualizer } from './micInputVisualizer.tsx';

@@ -30,6 +30,7 @@ export const MickInputVisualizer = ({
       setIsMicAvailable(true);
     } catch (err) {
       setIsMicAvailable(false);
+      console.error(err);
     }
   };
 
