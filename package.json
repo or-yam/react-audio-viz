@@ -11,7 +11,9 @@
     "test:watch": "vitest",
     "test": "vitest run",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "check-exports": "attw --pack .",
+    "ci": "npm run lint && npm run build && npm run check-exports && npm run test"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,6 +25,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.15.4",
     "@chromatic-com/storybook": "^1.6.1",
     "@storybook/addon-essentials": "^8.2.6",
     "@storybook/addon-interactions": "^8.2.6",
@@ -54,5 +57,25 @@
     "vite-plugin-dts": "^3.9.1",
     "vitest": "^1.6.0"
   },
-  "prepublishOnly": "npm run build"
+  "prepublishOnly": "npm run build",
+  "description": "Audio visualizer for audio samples in React",
+  "keywords": [
+    "audio",
+    "react",
+    "react-audio",
+    "visualizer"
+  ],
+  "homepage": "https://github.com/or-yam/react-audio-viz",
+  "bugs": {
+    "url": "https://github.com/or-yam/react-audio-viz/issues"
+  },
+  "author": {
+    "name": "or-yam",
+    "url": "https://github.com/or-yam"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/or-yam/react-audio-viz.git"
+  },
+  "license": "MIT"
 }
