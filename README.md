@@ -1,45 +1,21 @@
-<!-- # React + TypeScript + Vite
+# React-viz-audio
 
-## React npm package
+Audio visualizer for audio samples in React
 
-Including
+## Installation
 
-- React
-- TS
-- Vite
-- ESLint
-- Prettier
-- Vitest
-- React testing library
-- Storybook -->
-
-<!-- ## Getting started
-
-1. Create vite app
-   `npm create vite@latest`
-
-2. Project structure
-
-```txt
-📂 Root
-├── 📂 src
-│   ├── 📂 lib // what we deliver into the package
-│   │   ├── 📄 Button.tsx
-│   │   └── 📄 index.ts
-│   └── 📄 App.tsx // the test app
-├── ...config files
+```sh
+npm install viz-audio
 ```
 
-3. vite config for library mode
+## Usage
 
-```ts
-build: {
-    lib: {
-      entry: resolve(__dirname, 'src/lib/index.ts'),
-      formats: ['es'],
-      name: 'vite-react-lib',
-      fileName: (format) => `index.${format}.js`,
-    },
-``` -->
+```tsx
+import { AudioVisualizer } from 'viz-audio';
 
-<!-- https://dev.to/receter/how-to-create-a-react-component-library-using-vites-library-mode-4lma -->
+export default function App() {
+  return (
+    <AudioVisualizer height={300} width={400} audioElement={audioElement} />
+  );
+}
+```
