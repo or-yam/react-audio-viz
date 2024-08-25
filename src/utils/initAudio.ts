@@ -1,4 +1,4 @@
-export const initAudio = async (audioElement: HTMLAudioElement) => {
+export const initAudio = (audioElement: HTMLAudioElement) => {
   const audioContext = new AudioContext();
   const analyser = audioContext.createAnalyser();
   const mediaElementSource =

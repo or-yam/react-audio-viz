@@ -25,17 +25,20 @@ export const AudioVisualizer = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isAnimating = useRef(false);
 
-  const audioInit = useCallback(
-    async (canvasContext: CanvasRenderingContext2D) => {
-      if (!audioElement) return;
+  const handleAudioAnimation = useCallback(
+    async (canvasElement: HTMLCanvasElement) => {
+      if (!audioElement) {
+        console.warn('No audio element provided');
+        return;
+      }
 
       isAnimating.current = true;
-      const { analyser, audioContext } = await initAudio(audioElement);
+
+      const { analyser } = initAudio(audioElement);
 
       renderFrequencyGraph({
         analyser,
-        audioContext,
-        canvasContext,
+        canvasElement,
         canvasHeight: height,
         canvasWidth: width,
         options,
@@ -45,15 +48,17 @@ export const AudioVisualizer = ({
   );
 
   useEffect(() => {
-    const canvasContext = canvasRef.current?.getContext('2d');
-    if (!canvasContext) return;
     if (isAnimating.current) return;
 
-    audioInit(canvasContext);
+    const canvasElement = canvasRef.current;
+    if (!canvasElement) return;
+
+    handleAudioAnimation(canvasElement);
+
     return () => {
       isAnimating.current = false;
     };
-  }, [audioInit]);
+  }, [handleAudioAnimation]);
 
   return <canvas width={width} height={height} ref={canvasRef} />;
 };

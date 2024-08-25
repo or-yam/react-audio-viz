@@ -34,14 +34,13 @@ export const MickInputVisualizer = ({
     }
   };
 
-  const microphoneInit = useCallback(
-    async (canvasContext: CanvasRenderingContext2D) => {
-      const { analyser, audioContext } = await initMicrophone();
+  const handleMicrophoneAnimation = useCallback(
+    async (canvasElement: HTMLCanvasElement) => {
+      const { analyser } = await initMicrophone();
       isAnimating.current = true;
       renderFrequencyGraph({
         analyser,
-        audioContext,
-        canvasContext,
+        canvasElement,
         canvasHeight: height,
         canvasWidth: width,
         options,
@@ -51,17 +50,21 @@ export const MickInputVisualizer = ({
   );
 
   useEffect(() => {
-    if (!isMicAvailable) handleMicrophonePermission();
+    if (isAnimating.current) return;
+    if (!isMicAvailable) {
+      handleMicrophonePermission();
+      return;
+    }
 
-    const canvasContext = canvasRef.current?.getContext('2d');
-    if (!canvasContext) return;
+    const canvasElement = canvasRef.current;
+    if (!canvasElement) return;
 
-    microphoneInit(canvasContext);
+    handleMicrophoneAnimation(canvasElement);
 
     return () => {
       isAnimating.current = false;
     };
-  }, [isMicAvailable, microphoneInit]);
+  }, [isMicAvailable, handleMicrophoneAnimation]);
 
   return <canvas width={width} height={height} ref={canvasRef} />;
 };

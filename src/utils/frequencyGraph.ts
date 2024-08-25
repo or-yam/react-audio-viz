@@ -1,14 +1,12 @@
 export const renderFrequencyGraph = ({
   analyser,
-  canvasContext,
-  audioContext,
+  canvasElement,
   canvasWidth,
   canvasHeight,
   options = {},
 }: {
   analyser: AnalyserNode;
-  canvasContext: CanvasRenderingContext2D;
-  audioContext: AudioContext;
+  canvasElement: HTMLCanvasElement;
   canvasWidth: number;
   canvasHeight: number;
   options?: {
@@ -29,14 +27,15 @@ export const renderFrequencyGraph = ({
     centered = true,
   } = options;
 
+  const canvasContext = canvasElement.getContext(
+    '2d',
+  ) as CanvasRenderingContext2D;
   const animate = ({
     analyser,
     canvasContext,
-    audioContext,
   }: {
     analyser: AnalyserNode;
     canvasContext: CanvasRenderingContext2D;
-    audioContext: AudioContext;
   }) => {
     const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
@@ -66,9 +65,9 @@ export const renderFrequencyGraph = ({
 
     requestAnimationFrame(() => {
       canvasContext.clearRect(0, 0, canvasWidth, canvasHeight);
-      animate({ analyser, canvasContext, audioContext });
+      animate({ analyser, canvasContext });
     });
   };
 
-  animate({ analyser, canvasContext, audioContext });
+  animate({ analyser, canvasContext });
 };
