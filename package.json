@@ -14,7 +14,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "check-exports": "attw --pack . --ignore-rules cjs-resolves-to-esm",
-    "ci": "npm run lint && npm run build && npm run check-exports && npm run test"
+    "ci": "npm run lint && npm run build && npm run check-exports && npm run test",
+    "local-release": "npm run ci && changeset version && changeset publish"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.15.4",
+    "@changesets/cli": "^2.27.7",
     "@chromatic-com/storybook": "^1.7.0",
     "@storybook/addon-essentials": "^8.2.9",
     "@storybook/addon-interactions": "^8.2.9",
