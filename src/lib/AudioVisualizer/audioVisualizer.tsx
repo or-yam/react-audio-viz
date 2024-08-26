@@ -13,9 +13,15 @@ type AudioInputVisualizerProps = {
     blueFactor?: number;
     borderRadius?: number;
     centered?: boolean;
+    style?: React.CSSProperties;
   };
 };
 
+/**
+ * A React component that renders a visual representation of an audio element using HTML canvas.
+ * @component AudioVisualizer
+ * @example <AudioVisualizer width={300} height={300} audioElement={audioElement} />
+ */
 export const AudioVisualizer = ({
   width,
   height,
@@ -60,5 +66,12 @@ export const AudioVisualizer = ({
     };
   }, [handleAudioAnimation]);
 
-  return <canvas width={width} height={height} ref={canvasRef} />;
+  return (
+    <canvas
+      style={{ ...options.style }}
+      width={width}
+      height={height}
+      ref={canvasRef}
+    />
+  );
 };

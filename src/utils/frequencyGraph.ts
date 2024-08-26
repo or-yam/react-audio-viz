@@ -1,23 +1,27 @@
+type RenderFrequencyGraphOptions = {
+  barGap?: number;
+  redFactor?: number;
+  greenFactor?: number;
+  blueFactor?: number;
+  borderRadius?: number;
+  centered?: boolean;
+};
+
+type RenderFrequencyGraphArgs = {
+  analyser: AnalyserNode;
+  canvasElement: HTMLCanvasElement;
+  canvasWidth: number;
+  canvasHeight: number;
+  options?: RenderFrequencyGraphOptions;
+};
+
 export const renderFrequencyGraph = ({
   analyser,
   canvasElement,
   canvasWidth,
   canvasHeight,
   options = {},
-}: {
-  analyser: AnalyserNode;
-  canvasElement: HTMLCanvasElement;
-  canvasWidth: number;
-  canvasHeight: number;
-  options?: {
-    barGap?: number;
-    redFactor?: number;
-    greenFactor?: number;
-    blueFactor?: number;
-    borderRadius?: number;
-    centered?: boolean;
-  };
-}) => {
+}: RenderFrequencyGraphArgs) => {
   const {
     barGap = 6,
     redFactor = 5,

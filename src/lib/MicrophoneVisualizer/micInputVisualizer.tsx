@@ -15,6 +15,13 @@ type MicrophoneInputVisualizerProps = {
   };
 };
 
+/**
+   * A React component that renders a visual representation of microphone
+   * input audio data, using HTML canvas.
+   * @component
+   * @description
+   * @example
+   */
 export const MickInputVisualizer = ({
   width,
   height,
