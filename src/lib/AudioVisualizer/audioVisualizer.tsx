@@ -3,9 +3,9 @@ import { initAudio } from '../../utils/initAudio';
 import { renderFrequencyGraph } from '../../utils/frequencyGraph';
 
 type AudioInputVisualizerProps = {
+  audioSource: HTMLAudioElement | string;
   width: number;
   height: number;
-  audioElement?: HTMLAudioElement;
   options?: {
     barGap?: number;
     redFactor?: number;
@@ -25,22 +25,42 @@ type AudioInputVisualizerProps = {
 export const AudioVisualizer = ({
   width,
   height,
-  audioElement,
+  audioSource,
   options = {},
 }: AudioInputVisualizerProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const isAnimating = useRef(false);
+  const audioElement = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    if (audioSource instanceof HTMLAudioElement) {
+      audioElement.current = audioSource;
+    }
+
+    if (typeof audioSource === 'string') {
+      const audio = new Audio(audioSource);
+      audioElement.current = audio;
+      audio.play();
+    }
+
+    return () => {
+      if (audioElement.current) {
+        audioElement.current.pause();
+        audioElement.current = null;
+      }
+    };
+  }, [audioSource]);
 
   const handleAudioAnimation = useCallback(
     async (canvasElement: HTMLCanvasElement) => {
-      if (!audioElement) {
-        console.warn('No audio element provided');
+      if (!audioElement.current) {
+        console.warn('No audio source provided');
         return;
       }
 
       isAnimating.current = true;
 
-      const { analyser } = initAudio(audioElement);
+      const { analyser } = initAudio(audioElement.current);
 
       renderFrequencyGraph({
         analyser,
@@ -68,7 +88,7 @@ export const AudioVisualizer = ({
 
   return (
     <canvas
-      style={{ ...options.style }}
+      style={options.style}
       width={width}
       height={height}
       ref={canvasRef}

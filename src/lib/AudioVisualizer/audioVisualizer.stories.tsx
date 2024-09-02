@@ -16,7 +16,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const Demo = (
-  args: Omit<ComponentProps<typeof AudioVisualizer>, 'audioElement'>,
+  args: Omit<ComponentProps<typeof AudioVisualizer>, 'audioSource'>,
 ) => {
   const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(
     null,
@@ -25,19 +25,22 @@ const Demo = (
   return (
     <>
       <audio controls src={audioUrl} ref={setAudioElement}></audio>
-      {audioElement && (
-        <AudioVisualizer audioElement={audioElement} {...args} />
-      )}
+      {audioElement && <AudioVisualizer audioSource={audioElement} {...args} />}
     </>
   );
 };
 
 export const Centered: Story = {
-  args: { width: 400, height: 400 },
+  args: { width: 400, height: 400, audioSource: audioUrl },
   render: (args) => <Demo {...args} />,
 };
 
 export const Floored: Story = {
-  args: { width: 400, height: 400, options: { centered: false } },
+  args: {
+    width: 400,
+    height: 400,
+    audioSource: audioUrl,
+    options: { centered: false },
+  },
   render: (args) => <Demo {...args} />,
 };

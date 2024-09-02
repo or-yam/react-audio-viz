@@ -12,16 +12,17 @@ type MicrophoneInputVisualizerProps = {
     blueFactor?: number;
     borderRadius?: number;
     centered?: boolean;
+    style?: React.CSSProperties;
   };
 };
 
 /**
-   * A React component that renders a visual representation of microphone
-   * input audio data, using HTML canvas.
-   * @component
-   * @description
-   * @example
-   */
+ * A React component that renders a visual representation of microphone
+ * input audio data, using HTML canvas.
+ * @component
+ * @description
+ * @example
+ */
 export const MickInputVisualizer = ({
   width,
   height,
@@ -73,5 +74,12 @@ export const MickInputVisualizer = ({
     };
   }, [isMicAvailable, handleMicrophoneAnimation]);
 
-  return <canvas width={width} height={height} ref={canvasRef} />;
+  return (
+    <canvas
+      width={width}
+      height={height}
+      ref={canvasRef}
+      style={options.style}
+    />
+  );
 };
