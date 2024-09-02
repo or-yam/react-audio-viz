@@ -4,6 +4,11 @@
 
 Audio visualizer for audio samples in React
 
+Supported sources: HTML Audio Element, Audio File (src), Audio Media devices (microphone)
+
+![NPM Version](https://img.shields.io/npm/v/viz-audio)
+![NPM License](https://img.shields.io/npm/l/viz-audio)
+
 ## Installation
 
 ```sh
