@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { initMicrophone } from '../../utils/initMicrophone';
 import { renderFrequencyGraph } from '../../utils/frequencyGraph';
