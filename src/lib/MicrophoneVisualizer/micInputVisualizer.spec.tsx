@@ -1,6 +1,6 @@
-import { describe, expect, it, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
-import { MickInputVisualizer } from './micInputVisualizer';
+import { describe, expect, it, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { MickInputVisualizer } from "./micInputVisualizer";
 
 const AudioContext = vi.fn().mockImplementation(() => {
   return {
@@ -33,21 +33,21 @@ const navigator = {
   },
 };
 
-vi.stubGlobal('navigator', navigator);
-vi.stubGlobal('AudioContext', AudioContext);
-vi.stubGlobal('AudioWorkletNode', AudioWorkletNode);
+vi.stubGlobal("navigator", navigator);
+vi.stubGlobal("AudioContext", AudioContext);
+vi.stubGlobal("AudioWorkletNode", AudioWorkletNode);
 
-describe('AudioVisualizer component', () => {
-  it('renders correctly', () => {
+describe("AudioVisualizer component", () => {
+  it("renders correctly", () => {
     render(<MickInputVisualizer width={300} height={300} />);
 
     const canvas = screen.getByText(
-      (_, element) => element?.tagName === 'CANVAS',
+      (_, element) => element?.tagName === "CANVAS",
     );
 
     expect(canvas).toBeInTheDocument();
-    expect(canvas).toHaveAttribute('width', '300');
-    expect(canvas).toHaveAttribute('height', '300');
+    expect(canvas).toHaveAttribute("width", "300");
+    expect(canvas).toHaveAttribute("height", "300");
     expect(navigator.mediaDevices.getUserMedia).toHaveBeenCalled();
     expect(AudioContext).toHaveBeenCalled();
   });

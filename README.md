@@ -20,7 +20,7 @@ npm install viz-audio
 ### With microphone input
 
 ```tsx
-import { MickInputVisualizer } from 'viz-audio';
+import { MickInputVisualizer } from "viz-audio";
 
 export default function App() {
   return <MickInputVisualizer height={300} width={400} />;
@@ -30,7 +30,7 @@ export default function App() {
 ### With audio element
 
 ```tsx
-import { AudioVisualizer } from 'viz-audio';
+import { AudioVisualizer } from "viz-audio";
 
 export default function App() {
   const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(
@@ -51,11 +51,11 @@ export default function App() {
 ### With audio file src
 
 ```tsx
-import { AudioVisualizer } from 'viz-audio';
+import { AudioVisualizer } from "viz-audio";
 
 export default function App() {
   return (
-    <AudioVisualizer height={300} width={400} audioSource={'./demo.mp3'} />
+    <AudioVisualizer height={300} width={400} audioSource={"./demo.mp3"} />
   );
 }
 ```
