@@ -1,12 +1,20 @@
 import { defineConfig } from "vite";
-import { resolve } from "node:path";
 import react from "@vitejs/plugin-react";
+import { resolve } from "node:path";
 import dts from "vite-plugin-dts";
 
 import pkj from "./package.json";
 
 export default defineConfig({
-  plugins: [react(), dts({ entryRoot: "src/lib", exclude: ["**/*.spec.*"] })],
+  plugins: [
+    react(),
+    dts({
+      rollupTypes: true,
+      tsconfigPath: "./tsconfig.app.json",
+      entryRoot: "src",
+      exclude: ["**/*.spec.*", "demo-app"],
+    }),
+  ],
   resolve: {
     alias: {
       src: resolve(__dirname, "src"),

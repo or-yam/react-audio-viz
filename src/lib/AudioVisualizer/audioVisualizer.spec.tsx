@@ -1,4 +1,4 @@
-import audioUrl from "../../demo-app/Pokémon.mp3?url";
+import audioUrl from "src/demo-app/Pokémon.mp3?url";
 import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { AudioVisualizer } from "./audioVisualizer";
